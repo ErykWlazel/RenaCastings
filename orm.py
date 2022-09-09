@@ -1,3 +1,4 @@
+#object relational mapping
 import sqlite3
 
 
@@ -34,8 +35,8 @@ def return_values_from_table_column_where_ilike(table, column, ilike):
 def find_first_free_id():
     cursor.execute('''SELECT stock.id FROM stock''')
     j = 1
-    for i in (cursor.fetchall()):
-        if j == i[0]:
+    for id in (cursor.fetchall()):
+        if j == id[0]:
             j += 1
         else:
             return j
@@ -48,10 +49,10 @@ def check_if_table_contains(table, column, value):
     WHERE {column} = "{value}";''')
     return (cursor.fetchone())[0]
 
-print(check_if_table_contains('products', 'products.article_code', 'DAFC990226A'))
+#print(check_if_table_contains('products', 'products.article_code', 'DAFC990226A'))
 #cursor.execute('''INSERT INTO stock (id, product_id, location_id, amount, container_id, date, login
 #) VALUES ( 5, 1, 2, 340, 1, "01/10", "EVL") ''')  
 
-find_first_free_id()
+print(find_first_free_id())
 connect.commit()
 #connect.close()

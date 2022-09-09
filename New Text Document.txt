@@ -1,0 +1,25 @@
+yet to do:
+
+add:
+all proced proper functionality with record validation to database
+add colors to edited records
+unittest to crucial input output operations
+add reminders if data input is incorrect
+show list of changes choosed by user and ask if all of them are proper them commit changes and save updated database
+add delete functionality
+
+discuss if:
+vorrad should be used only by 1 person at the time?
+when to make record updates by workers?
+is the photo validation a good idea?
+what is crucial in changes history?
+[ login, date, article code, opertion type, amount, article info?]
+
+
+at the end:
+improve gui UX - make everything more readable, bigger, with v and x color buttons etc.
+make interactive instruction for every main possible case in dutch 
+build a script for correct conversion the vorrad system to exe file
+
+
+

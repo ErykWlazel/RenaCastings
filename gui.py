@@ -3,7 +3,7 @@ from tkinter import *
 from tkinter.ttk import Combobox, Treeview, Style
 from tkinter.font import BOLD, Font
 from typing import Callable
-import database as db
+import orm as db
 import os
 from datetime import datetime
 import re
@@ -65,7 +65,7 @@ def build_stock_treeview_columns_with_headings_in_style():
 
     stock_treeview.bind("<Button-1>", block_heading_resize)
     stock_treeview.bind("<Button-3>", popup_right_click_menu)
-  
+ 
 
 def build_right_click_menu_with_commands():
     global right_click_menu
@@ -80,6 +80,7 @@ def build_right_click_menu_with_commands():
 
 def popup_right_click_menu(event):
     iid = stock_treeview.identify_row(event.y)
+    
     try:
         if iid:
             stock_treeview.selection_set(iid)
@@ -269,7 +270,7 @@ def popup_right_click_menu_choice(event: str):
                 fill_treeview_with_table_records(merge_treeview, 'stock.date', 'DESC')
                 create_proceed_button(button_command_merge, 1, 0)
             case 'Add':
-                top.geometry('1000x300+550+300')
+                top.geometry('1100x200+550+300')
                 article_code_label = create_label('Article code:', 0, 0)
                 article_code_entry = Entry(top, width= 20)
                 article_code_entry.grid(row= 1, column= 0)
@@ -277,18 +278,51 @@ def popup_right_click_menu_choice(event: str):
                 article_code_listbox.grid(row= 2, column= 0)
                 for record in db.return_values_from_table_column('products', 'products.article_code'):
                     article_code_listbox.insert(0, record)
-                amount_label = create_label('Amount:', 0, 1)
-                amount_entry = create_amount_entry(1, 1)
+
+                full_gitterbox_weight_label = create_label('Full container weight:', 0, 1)
+                full_gitterbox_weight_entry = Entry(top, width= 7)
+                full_gitterbox_weight_entry.grid(row = 1, column= 1, padx= 20)
+                
+                one_product_weight_label = create_label('One product weight', 0, 2)
+                one_product_weight_entry = Entry(top, width= 7)
+                one_product_weight_entry.grid(row = 1, column= 2)
+
+
+
+                empty_gitterbox_weight_label = create_label('Empty container weight:', 0, 3)
+                empty_gitterbox_weight_entry = Entry(top, width= 7)
+                empty_gitterbox_weight_entry.grid(row= 1, column= 3)
+                empty_gitterbox_weight_entry.insert(0, 83)
+                
+
+                amount_label = create_label('Amount:', 0, 4)
+                amount_entry = create_amount_entry(1, 4)
                 amount_entry.delete(0, END)  
-                location_combobox = create_combobox('locations', 'locations.location_name', 1, 2)
-                container_combobox = create_combobox('containers', 'containers.container_name', 1, 3)
+                location_combobox = create_combobox('locations', 'locations.location_name', 1, 5)
+                container_combobox = create_combobox('containers', 'containers.container_name', 1, 6)
 
                 article_code_entry.focus()
-                create_proceed_button(button_command_add, 1, 4)
-                
+                create_proceed_button(button_command_add, 1, 7)
+
+                '''def key_release_calculate(event):
+                    amount_entry.delete(0, END)
+                    amount = (int(full_gitterbox_weight_entry.get()) - int(empty_gitterbox_weight_entry.get())) / int(one_product_weight_entry.get())
+                    if amount > 0:
+                        amount_entry.insert(0, amount)
+                    else:
+                        pass'''
+
+
+
+                '''full_gitterbox_weight_entry.insert(0, 580)
+                one_product_weight_entry.insert(0, 0.33)  
+                article_code_entry.insert(0, 'BEKC100230A')'''
                 
                 article_code_entry.bind('<KeyRelease>', key_release_search)
                 article_code_listbox.bind('<ButtonRelease-1>', fill_entry_with_selected)
+                #full_gitterbox_weight_entry.bind('<KeyRelease>', key_release_calculate)
+                #empty_gitterbox_weight_entry.bind('<KeyRelease>', key_release_calculate)
+                #one_product_weight_entry.bind('<KeyRelease>', key_release_calculate)
                 
                 
     
@@ -298,6 +332,8 @@ def popup_right_click_menu_choice(event: str):
 build_gui()
 
 fill_treeview_with_table_records(stock_treeview, 'stock.date', 'DESC')
+
+#popup_right_click_menu_choice('Add')
 
 
 
