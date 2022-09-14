@@ -1,4 +1,3 @@
-
 from tkinter import *
 from tkinter.ttk import Combobox, Treeview, Style
 from tkinter.font import BOLD, Font
@@ -8,7 +7,6 @@ import os
 from datetime import datetime
 import re
 
-#to do: set amount entry input validation
 
 def build_root():
     global root
@@ -21,23 +19,19 @@ def build_fonts():
     global big_font
     big_font = Font( family='Helvetica', size=28)
 
-def build_label():
-    stock_label = Label(root, text= 'STOCK LIST', font= big_font)
+def build_label(container: str, label_text: str, label_font: str):
+    stock_label = Label(container, text= label_text, font= label_font)
     stock_label.grid(row = 0, column= 0, sticky= NW)
 
 def build_stock_treeview():
     global stock_treeview
     stock_treeview = Treeview(root)
     stock_treeview.grid(row = 1, column = 0)
-    
 
 def build_styles():
     global stock_treeview_style
     stock_treeview_style = Style()
     stock_treeview_style.theme_use('clam')
-
-
-
 
 def build_stock_treeview_columns_with_headings_in_style():
     stock_treeview_style.configure("Treeview", font=(None, 16))
@@ -66,7 +60,6 @@ def build_stock_treeview_columns_with_headings_in_style():
     stock_treeview.bind("<Button-1>", block_heading_resize)
     stock_treeview.bind("<Button-3>", popup_right_click_menu)
  
-
 def build_right_click_menu_with_commands():
     global right_click_menu
     right_click_menu = Menu(root, tearoff= 0)
@@ -101,7 +94,7 @@ def block_heading_resize(event):
 def build_gui():
     build_root()
     build_fonts()
-    build_label()
+    build_label(root, 'STOCK LIST', big_font)
     build_styles()
     build_stock_treeview()
     build_stock_treeview_columns_with_headings_in_style()

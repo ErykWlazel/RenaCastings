@@ -49,6 +49,8 @@ def check_if_table_contains(table, column, value):
     WHERE {column} = "{value}";''')
     return (cursor.fetchone())[0]
 
+
+
 #print(check_if_table_contains('products', 'products.article_code', 'DAFC990226A'))
 #cursor.execute('''INSERT INTO stock (id, product_id, location_id, amount, container_id, date, login
 #) VALUES ( 5, 1, 2, 340, 1, "01/10", "EVL") ''')  
