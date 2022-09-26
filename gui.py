@@ -14,6 +14,7 @@ def build_root():
     root.title('GG')            
     root.state('zoomed')
     root.resizable(False, False)
+    return root
 
 def build_fonts():
     global big_font
@@ -23,7 +24,7 @@ def build_label(container: str, label_text: str, label_font: str):
     stock_label = Label(container, text= label_text, font= label_font)
     stock_label.grid(row = 0, column= 0, sticky= NW)
 
-def build_stock_treeview():
+def build_stock_treeview(root):
     global stock_treeview
     stock_treeview = Treeview(root)
     stock_treeview.grid(row = 1, column = 0)
@@ -92,11 +93,11 @@ def block_heading_resize(event):
         return 'break'
 
 def build_gui():
-    build_root()
+    root = build_root()
     build_fonts()
     build_label(root, 'STOCK LIST', big_font)
     build_styles()
-    build_stock_treeview()
+    build_stock_treeview(root)
     build_stock_treeview_columns_with_headings_in_style()
     build_right_click_menu_with_commands()
 
