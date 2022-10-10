@@ -4,7 +4,7 @@ import orm
 
 root = Tk()
 root.title("GG")
-#root.state("zoomed")
+root.state("zoomed")
 root.resizable(False, False)
 
 
@@ -30,11 +30,6 @@ def build_entry(
 
     return new_entry
 
-
-"""def entry_keyrelease_detach(custom_entry: Entry, event):
-    article_code_listbox.delete(0, END)
-    for record in db.return_values_from_table_column_where_ilike('products', 'products.article_code', f'{(article_code_entry.get().upper().replace(" ",""))}%'):
-        article_code_listbox.insert(0, record)"""
 
 
 def build_treeview(container: str, grid_row: int, grid_column: int) -> Treeview:
